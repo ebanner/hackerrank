@@ -19,11 +19,12 @@
   (->
 
    (reduce* {:alice-points 0 :bob-points 0}
-       [[a b] (map vector a b)]
-       (cond
-         (> a b) {:alice-points (inc alice-points) :bob-points bob-points}
-         (< a b) {:alice-points alice-points :bob-points (inc bob-points)}
-         (= a b) {:alice-points alice-points :bob-points bob-points}))
+            [[a b] (map vector a b)]
+
+     (cond
+       (> a b) {:alice-points (inc alice-points) :bob-points bob-points}
+       (< a b) {:alice-points alice-points :bob-points (inc bob-points)}
+       (= a b) {:alice-points alice-points :bob-points bob-points}))
 
    ((juxt :alice-points :bob-points))))
 
