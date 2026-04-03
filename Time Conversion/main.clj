@@ -19,11 +19,13 @@
 
 (defn convert [hours minutes seconds mode]
   (cond
-    (and (= hours 12) (= mode "AM")) (serialize 0 minutes seconds)
-    (and (= hours 12) (= mode "PM")) (serialize hours minutes seconds)
-    (= mode "PM") (serialize (+ hours 12) minutes seconds)
-    :else (serialize hours minutes seconds)))
+    (and (= hours 12) (= mode "AM")) [0 minutes seconds]
+    (and (= hours 12) (= mode "PM")) [hours minutes seconds]
+    (= mode "PM") [(+ hours 12) minutes seconds]
+    :else [hours minutes seconds]))
 
 (defn timeConversion [s]
   (let [{:keys [hours minutes seconds mode]} (extract s)]
-    (convert hours minutes seconds mode)))
+    (->>
+     (convert hours minutes seconds mode)
+     (apply serialize))))
