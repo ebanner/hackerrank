@@ -33,10 +33,13 @@
   "NO")
 
 (defclause kangaroo [x1 v1 x2 v2] true
-  (loop [x1 x1
-         x2 x2]
+  (->
+   (loop [x1 x1
+          x2 x2]
 
-    (cond
-      (= x1 x2) "YES"
-      (> x1 x2) "NO"
-      :else (recur (+ x1 v1) (+ x2 v2)))))
+     (cond
+       (= x1 x2) true
+       (> x1 x2) false
+       :else (recur (+ x1 v1) (+ x2 v2))))
+
+   (if "YES" "NO")))
