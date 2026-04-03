@@ -7,9 +7,6 @@
 ;  2. STRING_ARRAY P
 ;
 
-(defmacro all? [[binding coll] & body]
-  `(every? (fn [~binding] ~@body) ~coll))
-
 (defn safe-get-in [coll [i j]]
   (when (and (< i (count coll))
              (< j (count (first coll))))
@@ -21,11 +18,11 @@
         m (count (first P))]
 
     (every? identity
-            (for [i (range n)
-                  j (range m)]
+      (for [i (range n)
+            j (range m)]
 
-              (= (safe-get-in G [(+ row i) (+ col j)])
-                 (safe-get-in P [i j]))))))
+        (= (safe-get-in G [(+ row i) (+ col j)])
+           (safe-get-in P [i j]))))))
 
 (defn gridSearch [G-strings P-strings]
   (let [G (mapv vec G-strings)
