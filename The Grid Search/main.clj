@@ -7,9 +7,9 @@
 ;  2. STRING_ARRAY P
 ;
 
-(defn safe-get-in [coll [i j]]
-  (when (and (< i (count coll))
-             (< j (count (first coll))))
+(defn safe-get-in [grid [i j]]
+  (when (and (< i (count grid))
+             (< j (count (first grid))))
 
     (get-in coll [i j])))
 
@@ -24,9 +24,9 @@
         (= (safe-get-in G [(+ row i) (+ col j)])
            (safe-get-in P [i j]))))))
 
-(defn gridSearch [G-strings P-strings]
-  (let [G (mapv vec G-strings)
-        P (mapv vec P-strings)
+(defn gridSearch [G' P']
+  (let [G (mapv vec G')
+        P (mapv vec P')
         N (count G)
         M (count (first G))]
 
