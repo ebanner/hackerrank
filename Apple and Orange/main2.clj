@@ -22,20 +22,18 @@
   (for [x oranges] (+ x b)))
 
 (defn countApplesAndOranges [s t a b apples oranges]
-  (def num-apples
-    (reduce* [num-apples 0
-              apple-destination (get-apple-destinations apples a)]
+  (let [num-apples
+        (reduce* [num-apples 0
+                  apple-destination (get-apple-destinations apples a)]
+          (if (≤ s apple-destination t)
+            (inc num-apples)
+            num-apples))
 
-      (if (≤ s apple-destination t)
-        (inc num-apples)
-        num-apples)))
-
-  (def num-oranges
-    (reduce* [num-oranges 0
-              orange-destination (get-orange-destinations oranges b)]
-
-      (if (≤ s orange-destination t)
-        (inc num-oranges)
-        num-oranges)))
+        num-oranges
+        (reduce* [num-oranges 0
+                  orange-destination (get-orange-destinations oranges b)]
+          (if (≤ s orange-destination t)
+            (inc num-oranges)
+            num-oranges))])
 
   [num-apples num-oranges])
