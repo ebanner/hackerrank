@@ -9,12 +9,15 @@
 
 (defn between? [n A B]
   (and
-   (every? identity (for [a A] (zero? (mod n a))))
-   (every? identity (for [b B] (zero? (mod b n))))))
+   (every? identity
+     (for [a A] (zero? (mod n a))))
+
+   (every? identity
+     (for [b B] (zero? (mod b n))))))
 
 (defn getTotalX [a b]
   (->
    (for [n (range (apply min a) (inc (apply max b)))
          :when (between? n a b)]
      n)
-   (count)))
+   count))
