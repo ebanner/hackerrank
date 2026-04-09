@@ -18,24 +18,24 @@
                [(inc p2) (inc (inc p2))])))))
 
 (defn pageCount [n p]
-  (def left
-   (loop [pages-flipped 0
-          pages [nil 1]]
+  (let [left
+        (loop [pages-flipped 0
+               pages [nil 1]]
 
-     (if (some #{p} pages)
-       pages-flipped
-       (let [[_ p2] pages]
-         (recur (inc pages-flipped)
-                [(inc p2) (inc (inc p2))])))))
+          (if (some #{p} pages)
+            pages-flipped
+            (let [[_ p2] pages]
+              (recur (inc pages-flipped)
+                     [(inc p2) (inc (inc p2))]))))
 
-  (def right
-    (loop [pages-flipped 0
-           pages [(dec n) n]]
+        right
+        (loop [pages-flipped 0
+               pages (get-last-pages n)]
 
-      (if (some #{p} pages)
-        pages-flipped
-        (let [[p1 _] pages]
-          (recur (inc pages-flipped)
-                 [(dec p1) (dec (dec p1))])))))
+          (if (some #{p} pages)
+            pages-flipped
+            (let [[p1 _] pages]
+              (recur (inc pages-flipped)
+                     [(dec (dec p1)) (dec p1)]))))]
 
-  (min left right))
+    (min left right)))
