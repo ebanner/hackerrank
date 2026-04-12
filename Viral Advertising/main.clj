@@ -10,8 +10,7 @@
 
 (defn viralAdvertising [n]
   (reduce* [num-likes 5
-            i (range (dec n))]
-
+            _ (range (dec n))]
     (->
      (quot num-likes 2)
      (* 3))))
