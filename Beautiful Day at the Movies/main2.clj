@@ -18,12 +18,12 @@
 (defn beautiful? [n k]
   (->
    (- n (reversed n))
-   (Math/abs)
+   Math/abs
    (rem k)
-   (zero?)))
+   zero?))
 
 (defn beautifulDays [i j k]
   (->>
    (range i (inc j))
    (filter #(beautiful? % k))
-   (count)))
+   count))
